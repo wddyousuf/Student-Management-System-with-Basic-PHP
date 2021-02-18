@@ -1,0 +1,24 @@
+.main_header{
+	margin-top: 30px;
+}
+.error{
+	color: red;
+	font-style: italic;
+	font-weight: 700;
+}
+.carddddd{
+	font-size: 45px;
+}
+.footer-area{
+	background: #3CA9E8;
+	text-align: center;
+	color: white;
+
+}
+.footer-area p{
+	margin: 20px auto;
+	padding: 20px 0;
+}
+.content{
+	min-height: 800px;
+}
