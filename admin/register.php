@@ -44,11 +44,11 @@ session_start();
 									$query="INSERT INTO `user`(`name`, `email`, `username`, `password`, `photo`, `status`) VALUES ('$name','$email','$username','$password','$photo_name','inactive')";
 									$result=mysqli_query($link,$query);
 									if ($result) {
-										$_SESSION['data_insert_success']="Data Insert Successful";
+										$success="Data Insert Successful";
 										move_uploaded_file($_FILES['photo']['tmp_name'],'images/'.$photo_name);
 										header('location: register.php');
 									}else {
-										$_SESSION['data_insert_failure']="Data Insert Failed";
+										$failure="Data Insert Failed";
 									}
 
 								}else {
@@ -87,12 +87,12 @@ session_start();
 		<div class="container">
 			<br>
 			<h1 class="text-center text-primary">User Registration Form</h1>
-			<?php if (isset($_SESSION['data_insert_success'])) {
-				echo '<div class="alert alert-success">'.$_SESSION['data_insert_success'].'</div>';
-			} unset($_SESSION['data_insert_success']); ?>
-			<?php if (isset($_SESSION['data_insert_failure'])) {
-				echo '<div class="alert alert-warning">'.$_SESSION['data_insert_failure'].'</div>';
-			} unset($_SESSION['data_insert_failure']); ?>
+			<?php if (isset($success)) {
+				echo '<div class="alert alert-success">'.$success.'</div>';
+			} ?>
+			<?php if (isset($failure)) {
+				echo '<div class="alert alert-warning">'.$failure.'</div>';
+			} ?>
 			<hr><br>
 			<div class="row justify-content-center">
 				<div class="col-sm-12">

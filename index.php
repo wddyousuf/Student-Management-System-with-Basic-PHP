@@ -1,3 +1,7 @@
+<?php require_once 'admin/dbcon.php';
+
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,7 @@
 
 		<div class="container">
 			<br>
-			
+
 			<a href="admin/login.php" class="btn btn-primary float-right">Login</a>
 			<br>
 			<h1 class="main_header text-center text-primary">Welcome to Student Management System</h1>
@@ -28,11 +32,11 @@
 							<td><label for="choose">Choose Class</label></td>
 							<td>
 								<select class="form-control" name="choose" id="choose">
-									<option value="">1st Year</option>	
-									<option value="1">1st Year</option>	
-									<option value="2">2nd Year</option>	
-									<option value="3">3rd Year</option>	
-									<option value="4">4th Year</option>	
+									<option value="">Select</option>
+									<option value="1st">1st Year</option>
+									<option value="2nd">2nd Year</option>
+									<option value="3rd">3rd Year</option>
+									<option value="4th">4th Year</option>
 								</select>
 							</td>
 						</tr>
@@ -49,6 +53,52 @@
 				</div>
 
 			</div>
+			<br><br>
+
+<?php
+if (isset($_POST['show_info'])) {
+	$class=$_POST['choose'];
+	$roll=$_POST['roll'];
+
+	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll';");
+	$dbdata=mysqli_fetch_assoc($query);
+	if (mysqli_num_rows($query)) {?>
+		<div class="row justify-content-center">
+			<div class="col-sm-8 ">
+				<table class="table table-bordered table-hover text-center">
+					<tr>
+						<td rowspan="5"> <img src="admin/stimages/<?php echo $dbdata['photo']; ?>" alt="" class="img-thumbnail" style="width: 150px;"> </td>
+						<td>Name</td>
+						<td><?php echo $dbdata['name']; ?></td>
+					</tr>
+					<tr>
+						<td>Roll</td>
+						<td><?php echo $dbdata['roll']; ?></td>
+					</tr>
+					<tr>
+						<td>Class</td>
+						<td><?php echo $dbdata['class']; ?></td>
+					</tr>
+					<tr>
+						<td>City</td>
+						<td><?php echo $dbdata['city']; ?></td>
+					</tr>
+					<tr>
+						<td>Contact No</td>
+						<td><?php echo $dbdata['pcontact']; ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<?php
+
+	}
+}
+
+
+ ?>
+
+
 
 		</div>
 
