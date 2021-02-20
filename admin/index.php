@@ -51,6 +51,9 @@ require_once'dbcon.php';
 					  <a href="index.php?page=updatestudent" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Update Student</a>
 					  <a href="index.php?page=allstudent" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> All Students</a>
 					  <a href="index.php?page=alluser" class="list-group-item list-group-item-action disabled"><i class="fa fa-users"></i> All users</a>
+						<a href="index.php?page=addresult" class="list-group-item list-group-item-action disabled"><i class="fa fa-edit"></i> Add Result</a>
+						<a href="index.php?page=viewresult" class="list-group-item list-group-item-action disabled"><i class="fa fa-area-chart"></i> View Result</a>
+						<a href="index.php?page=attendance" class="list-group-item list-group-item-action disabled"><i class="fa fa-bar-chart"></i> Attendance</a>
 					</div>
 				</div>
 				<div class="col-sm-9">

@@ -13,7 +13,7 @@
 </head>
 	<body>
 
-		<div class="container">
+		<div class="container" style="min-height:900px;">
 			<br>
 
 			<a href="admin/login.php" class="btn btn-primary float-right">Login</a>
@@ -62,12 +62,14 @@ if (isset($_POST['show_info'])) {
 
 	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll';");
 	$dbdata=mysqli_fetch_assoc($query);
+  $rquery=mysqli_query($link,"SELECT * FROM `result` WHERE `class`='$class' and `roll`='$roll';");
+	$rdbdata=mysqli_fetch_assoc($rquery);
 	if (mysqli_num_rows($query)) {?>
 		<div class="row justify-content-center">
 			<div class="col-sm-8 ">
 				<table class="table table-bordered table-hover text-center">
 					<tr>
-						<td rowspan="5"> <img src="admin/stimages/<?php echo $dbdata['photo']; ?>" alt="" class="img-thumbnail" style="width: 150px;"> </td>
+						<td rowspan="7"> <img src="admin/stimages/<?php echo $dbdata['photo']; ?>" alt="" class="img-thumbnail" style="width: 150px;"> </td>
 						<td>Name</td>
 						<td><?php echo $dbdata['name']; ?></td>
 					</tr>
@@ -76,8 +78,12 @@ if (isset($_POST['show_info'])) {
 						<td><?php echo $dbdata['roll']; ?></td>
 					</tr>
 					<tr>
-						<td>Class</td>
+						<td>Year</td>
 						<td><?php echo $dbdata['class']; ?></td>
+					</tr>
+          <tr>
+						<td>Semester</td>
+						<td><?php echo $rdbdata['semester']; ?></td>
 					</tr>
 					<tr>
 						<td>City</td>
@@ -87,20 +93,28 @@ if (isset($_POST['show_info'])) {
 						<td>Contact No</td>
 						<td><?php echo $dbdata['pcontact']; ?></td>
 					</tr>
+          <tr>
+						<td>Result</td>
+						<td><?php echo $rdbdata['point']; ?></td>
+					</tr>
 				</table>
 			</div>
 		</div>
 		<?php
 
+	}else {
+		?>
+		<script type="text/javascript">
+			alert('data not found');
+		</script>
+		<?php
 	}
 }
-
-
  ?>
-
-
-
 		</div>
+    <footer class="footer-area">
+			<p>Copyright &copy; 2016 - <?= date('Y') ?> Student Management System.All Rights Reserved.</p>
+		</footer>
 
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
