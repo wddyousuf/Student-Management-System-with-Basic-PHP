@@ -1,3 +1,9 @@
+<?php
+	if (!isset($_SESSION['user_login'])) {
+		header('location: login.php');
+	}
+
+ ?>
 <h1 class="text-primary"> <i class="fa fa-user"></i> User Profile <small class="text-muted"> My Profile</small></h1>
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">

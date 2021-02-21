@@ -84,7 +84,7 @@ session_start();
 </head>
 	<body>
 
-		<div class="container">
+		<div class="container" style="min-height: 800px;">
 			<br>
 			<h1 class="text-center text-primary">User Registration Form</h1>
 			<?php if (isset($success)) {
@@ -221,10 +221,11 @@ session_start();
 				</div>
 			</div>
 			<hr>
-			<footer>
-				<p>Copyright &copy; 2016 - <?= date('Y') ?> All Rights Reserved.</p>
-			</footer>
+
 		</div>
+		<footer class="footer-area">
+			<p>Copyright &copy; 2016 - <?= date('Y') ?> All Rights Reserved.</p>
+		</footer>
 
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

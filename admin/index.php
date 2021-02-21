@@ -3,8 +3,12 @@ require_once'dbcon.php';
 	session_start();
 	if (!isset($_SESSION['user_login'])) {
 		header('location: login.php');
-	}
 
+
+	}
+	$admin=$_SESSION['user_login'];
+	$query=mysqli_query($link,"SELECT * FROM `user` WHERE `username`='$admin';");
+	$result=mysqli_fetch_assoc($query);
  ?>
 <!DOCTYPE html>
 <html>
@@ -25,10 +29,10 @@ require_once'dbcon.php';
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav ml-auto">
 		      <li class="nav-item">
-		        <a class="nav-link" href="index.php?page=dashboard"><i class="fa fa-user"></i> Welcome</a>
+		        <a class="nav-link" href="index.php?page=dashboard"><i class="fa fa-user"></i> Welcome: <?php echo $result['name']; ?></a>
 		      </li>
 					<li class="nav-item">
-		        <a class="nav-link" href="register.php"><i class="fa fa-user-plus"></i> Add User</a>
+		        <a class="nav-link" href="register.php"><i class="fa fa-user-plus"></i> Add Admin</a>
 		      </li>
 					<li class="nav-item">
 		        <a class="nav-link" href="index.php?page=userprofile"><i class="fa fa-user"></i> Profile</a>

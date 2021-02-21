@@ -1,3 +1,9 @@
+<?php
+	if (!isset($_SESSION['user_login'])) {
+		header('location: login.php');
+	}
+
+ ?>
 <h1 class="text-primary"> <i class="fa fa-dashboard"></i> Dashboard <small class="text-muted"> Statistics Overview</small></h1>
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
@@ -24,14 +30,14 @@ $usernmbr=mysqli_num_rows($countuser);
 						<div class="col-xs-9 ml-auto mr-2">
 							<div class=" float-right carddddd"><?php echo $stnmbr; ?></div>
 							<div class="clearfix"></div>
-							<div class="float-right">All Students</div>
+							<div class="float-right">Number of Registered Student</div>
 						</div>
 					</div>
 				</div>
 				<a href="index.php?page=allstudent">
 					<div class="card-footer">
-					<span class="float-left">All Students</span>
-					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i></span>
+					<span class="float-left"></span>
+					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i>All Students</span>
 					<div class="clearfix"></div>
 				</div>
 				</a>
@@ -47,7 +53,7 @@ $usernmbr=mysqli_num_rows($countuser);
 						<div class="col-xs-9 ml-auto mr-2">
 							<div class=" float-right carddddd"><?php echo $usernmbr; ?></div>
 							<div class="clearfix"></div>
-							<div class="float-right">All Users</div>
+							<div class="float-right">Number of Registered Admin</div>
 						</div>
 					</div>
 				</div>

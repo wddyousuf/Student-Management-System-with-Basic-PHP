@@ -1,3 +1,9 @@
+<?php
+	if (!isset($_SESSION['user_login'])) {
+		header('location: login.php');
+	}
+
+ ?>
 <h1 class="text-primary"> <i class="fa fa-user-plus"></i> Add Student <small class="text-muted"> Add New Student</small></h1>
 <nav aria-label="breadcrumb">
 	<ol class="breadcrumb">
