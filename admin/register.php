@@ -43,7 +43,7 @@ session_start();
 									$password=md5($password);
 									$query="INSERT INTO `user`(`name`, `email`, `username`, `password`, `photo`, `status`) VALUES ('$name','$email','$username','$password','$photo_name','inactive')";
 									$result=mysqli_query($link,$query);
-									if ($result) {
+									if (isset($result)) {
 										$success="Data Insert Successful";
 										move_uploaded_file($_FILES['photo']['tmp_name'],'images/'.$photo_name);
 										header('location: register.php');
