@@ -196,6 +196,16 @@ if (isset($_POST['submitresult'])) {
 							</td>
 						</tr>
 						<tr>
+							<td><label for="smstr">Choose Semester</label></td>
+							<td>
+								<select class="form-control" name="smstr" id="smstr">
+									<option value="" disabled>Select</option>
+									<option value="1st">1st Semester</option>
+									<option value="2nd">2nd Semester</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<td><label for="roll">Roll No</label></td>
 							<td> <input class="form-control" type="text" id="roll" name="roll" pattern="[0-9]{6}" placeholder="160601"> </td>
 						</tr>
@@ -223,10 +233,11 @@ if (isset($_POST['submitresult'])) {
       <?php
       if (isset($_POST['submit'])) {
       	$class=$_POST['choose'];
+				$sem=$_POST['smstr'];
       	$roll=$_POST['roll'];
 
 
-      	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll';");
+      	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `semester`='$sem' and `roll`='$roll';");
       	$dbdata=mysqli_fetch_assoc($query);
         if (mysqli_num_rows($query)) {?>
       		<div class="row justify-content-center">
@@ -262,8 +273,8 @@ if (isset($_POST['submitresult'])) {
                     <td>
                       <select class="form-control" name="choose" id="choose" required="">
       									<option value="" disabled>Select</option>
-      									<option value="1st">1st Semester</option>
-      									<option value="2nd">2nd Semester</option>
+      									<option <?php echo $dbdata['semester']=='1st' ? 'selected=""':''; ?> value="1st">1st Semester</option>
+      									<option <?php echo $dbdata['semester']=='2nd' ? 'selected=""':''; ?> value="2nd">2nd Semester</option>
       								</select>
                     </td>
                   </tr>

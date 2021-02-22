@@ -45,14 +45,9 @@ $curr_date= date('Y-m-d');
 
 <?php
 if (isset($_POST['sbmtatnd'])) {
-	$classsfetch=mysqli_query($link,"SELECT * FROM `student_info`;");
-	$rrowfetch=mysqli_fetch_assoc($classsfetch);
+
 	$atnd=$_POST['actionn'];
-	$aid=$rrowfetch['id'];
-	$aname=$rrowfetch['name'];
-	$aroll=$rrowfetch['roll'];
-	$classs=$rrowfetch['class'];
-	$seme=$rrowfetch['semester'];
+
 
 	$acheck=mysqli_query($link,"SELECT DISTINCT `time` FROM `attendance`;");
 	$bfetch=mysqli_fetch_assoc($acheck);
@@ -60,6 +55,10 @@ if (isset($_POST['sbmtatnd'])) {
 		$atnd_error="Attendance Already Taken";
 	}else {
 		foreach ($atnd as $at_key => $at_value) {
+			$classsfetch=mysqli_query($link,"SELECT * FROM `student_info` WHERE `roll`='$at_key';");
+			$rrowfetch=mysqli_fetch_assoc($classsfetch);
+			$classs=$rrowfetch['class'];
+			$seme=$rrowfetch['semester'];
 			if ($at_value=="Present") {
 				$attts=mysqli_query($link,"INSERT INTO `attendance`(`class`,`semester`,`roll`,`attend`,`time`) VALUES ('$classs','$seme','$at_key','Present',now());");
 			}elseif ($at_value=="Absent") {

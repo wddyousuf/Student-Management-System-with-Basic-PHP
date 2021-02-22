@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 	if (!isset($_SESSION['user_login'])) {
 		header('location: login.php');
 	}
@@ -57,6 +58,14 @@
           <option <?php echo $db_row['class']=='3rd' ? 'selected=""':''; ?> value="3rd">3rd Year</option>
           <option <?php echo $db_row['class']=='4th' ? 'selected=""':''; ?> value="4th">4th Year</option>
         </select>
+      </div>
+			<div class="form-group">
+				<label for="choose" >Select semester</label>
+          <select class="form-control" name="semsester" id="choose" required="">
+            <option value="" disabled>Select</option>
+            <option <?php echo $db_row['semester']=='1st' ? 'selected=""':''; ?> value="1st">1st Semester</option>
+            <option <?php echo $db_row['semester']=='2nd' ? 'selected=""':''; ?> value="2nd">2nd Semester</option>
+          </select>
       </div>
       <div class="form-group">
         <label for="stname">Student City</label>
