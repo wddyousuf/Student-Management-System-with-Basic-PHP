@@ -62,7 +62,7 @@ if (isset($_POST['show_info'])) {
 
 	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll';");
 	$dbdata=mysqli_fetch_assoc($query);
-  $rquery=mysqli_query($link,"SELECT * FROM `result` WHERE `class`='$class' and `roll`='$roll';");
+  $rquery=mysqli_query($link,"SELECT * FROM `reslt` WHERE `class`='$class' and `roll`='$roll';");
 	$rdbdata=mysqli_fetch_assoc($rquery);
 	if (mysqli_num_rows($query)) {?>
 		<div class="row justify-content-center">
@@ -94,8 +94,8 @@ if (isset($_POST['show_info'])) {
 						<td><?php echo $dbdata['pcontact']; ?></td>
 					</tr>
           <tr>
-						<td>Result</td>
-						<td><?php echo $rdbdata['point']; ?></td>
+						<td>CGPA</td>
+						<td><?php echo $rdbdata['cgpa']; ?></td>
 					</tr>
 				</table>
 			</div>
