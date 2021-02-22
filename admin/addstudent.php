@@ -19,11 +19,12 @@ if (isset($_POST['submitdata'])) {
   $class=$_POST['class'];
   $city=$_POST['city'];
   $contact=$_POST['contact'];
+	$sem=$_POST['semsester'];
 
   $photo=explode('.',$_FILES['photo']['name']);
 	$photo=end($photo);
 	$photo_name=$roll.'.'.$photo;
-  $query="INSERT INTO `student_info`(`name`, `roll`, `class`, `city`, `pcontact`, `photo`) VALUES ('$name','$roll','$class','$city','$contact','$photo_name');";
+  $query="INSERT INTO `student_info`(`name`, `roll`, `class`,`semester`, `city`, `pcontact`, `photo`) VALUES ('$name','$roll','$class','$sem','$city','$contact','$photo_name');";
   $result=mysqli_query($link,$query);
   if ($result) {
     move_uploaded_file($_FILES['photo']['tmp_name'],'stimages/'.$photo_name);
@@ -60,6 +61,14 @@ if (isset($_POST['submitdata'])) {
           <option value="3rd">3rd Year</option>
           <option value="4th">4th Year</option>
         </select>
+      </div>
+			<div class="form-group">
+				<label for="choose" >Select semester</label>
+          <select class="form-control" name="semsester" id="choose" required="">
+            <option value="" disabled>Select</option>
+            <option value="1st">1st Semester</option>
+            <option value="2nd">2nd Semester</option>
+          </select>
       </div>
       <div class="form-group">
         <label for="stname">Student City</label>

@@ -24,6 +24,14 @@ $curr_date= date('Y-m-d');
 							<option class="form-control" value="4th" >4th Year</option>
 						</select>
 			</div>
+			<div class="col-sm-6">
+				<label for="class" >Select Semester</label>
+						<select name="semester" id="semester" class="form-control">
+							<option class="form-control" value="">select</option>
+							<option class="form-control" value="1st" >1st Semester</option>
+							<option class="form-control" value="2nd" >2nd Semester</option>
+						</select>
+			</div>
 			<div class="col-sm-4">
 				<br><br>
 					<input type="submit" name="showinfo" value="Show Students" class="btn btn-success">
@@ -43,6 +51,8 @@ if (isset($_POST['sbmtatnd'])) {
 	$aid=$rrowfetch['id'];
 	$aname=$rrowfetch['name'];
 	$aroll=$rrowfetch['roll'];
+	$classs=$rrowfetch['class'];
+	$seme=$rrowfetch['semester'];
 
 	$acheck=mysqli_query($link,"SELECT DISTINCT `time` FROM `attendance`;");
 	$bfetch=mysqli_fetch_assoc($acheck);
@@ -51,16 +61,15 @@ if (isset($_POST['sbmtatnd'])) {
 	}else {
 		foreach ($atnd as $at_key => $at_value) {
 			if ($at_value=="Present") {
-				$attts=mysqli_query($link,"INSERT INTO `attendance`(`roll`,`attend`,`time`) VALUES ('$at_key','Present','$curr_date');");
+				$attts=mysqli_query($link,"INSERT INTO `attendance`(`class`,`semester`,`roll`,`attend`,`time`) VALUES ('$classs','$seme','$at_key','Present',now());");
 			}elseif ($at_value=="Absent") {
-				$attts=mysqli_query($link,"INSERT INTO `attendance`(`roll`,`attend`,`time`) VALUES ('$at_key','Absent','$curr_date');");
+				$attts=mysqli_query($link,"INSERT INTO `attendance`(`class`,`semester`,`roll`,`attend`,`time`) VALUES ('$classs','$seme','$at_key','Absent',now());");
 			}elseif($at_value=="Leave") {
-				$attts=mysqli_query($link,"INSERT INTO `attendance`(`roll`,`attend`,`time`) VALUES ('$at_key','Leave','$curr_date');");
+				$attts=mysqli_query($link,"INSERT INTO `attendance`(`class`,`semester`,`roll`,`attend`,`time`) VALUES ('$classs','$seme','$at_key','Leave',now());");
 			}
 		}
 		if (isset($attts)) {
 			$scss_msg="Data Inserted Successfully";
-			header('location: index.php?page=attendance');
 			}
 	}
 }
@@ -71,7 +80,8 @@ if (isset($_POST['sbmtatnd'])) {
 require_once 'dbcon.php';
 if (isset($_POST['showinfo'])) {
 	$class=$_POST['class'];
-	$classfetch=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class';");
+	$sem=$_POST['semester'];
+	$classfetch=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `semester`='$sem';");
 	if (mysqli_num_rows($classfetch)) {?>
 		<div class="col-sm-12 text-center bg-secondary text-white" style="padding-top: 18px;">
 			<?php echo "Date: ".$curr_date; ?>
