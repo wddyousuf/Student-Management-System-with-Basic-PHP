@@ -42,6 +42,15 @@ require_once 'dbcon.php';
 								</select>
 							</td>
 						</tr>
+            <tr>
+							<td><label for="choose">Choose Semester</label></td>
+							<td>
+								<select class="form-control" name="smstr" id="smstr">
+									<option value="">Select</option>
+									<option value="1st">1st Semester</option>
+									<option value="2nd">2nd Semester</option>
+								</select>
+							</td>
 						<tr>
 							<td><label for="roll">Roll No</label></td>
 							<td> <input class="form-control" type="text" id="roll" name="roll" pattern="[0-9]{6}" placeholder="160601"> </td>
@@ -59,21 +68,17 @@ require_once 'dbcon.php';
       <?php
       if (isset($_POST['submit'])) {
       	$class=$_POST['choose'];
+        $semes=$_POST['smstr'];
       	$roll=$_POST['roll'];
 
-      	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll';");
+      	$query=mysqli_query($link,"SELECT * FROM `student_info` WHERE `class`='$class' and `roll`='$roll' and `semester`='$semes';");
       	$dbdata=mysqli_fetch_assoc($query);
-        $rquery=mysqli_query($link,"SELECT * FROM `reslt` WHERE `class`='$class' and `roll`='$roll';");
+        $rquery=mysqli_query($link,"SELECT * FROM `reslt` WHERE `class`='$class' and `roll`='$roll'and `semester`='$semes';");
       	$rdbdata=mysqli_fetch_assoc($rquery);
       	if (mysqli_num_rows($query)) {?>
       		<div class="row justify-content-center">
       			<div class="col-sm-8 ">
-      				<table class="table table-bordered table-hover text-center">
-      					<tr>
-      						<td rowspan="7"> <img src="stimages/<?php echo $dbdata['photo']; ?>" alt="" class="img-thumbnail" style="width: 150px;"> </td>
-      						<td>Name</td>
-      						<td><?php echo $dbdata['name']; ?></td>
-      					</tr>
+      				<table class="table table-bordered table-striped table-hover text-center">
       					<tr>
       						<td>Roll</td>
       						<td><?php echo $dbdata['roll']; ?></td>
@@ -84,11 +89,57 @@ require_once 'dbcon.php';
       					</tr>
                 <tr>
       						<td>Semester</td>
-      						<td><?php echo $rdbdata['semester']; ?></td>
+      						<td><?php echo $dbdata['semester']; ?></td>
       					</tr>
-      						<td>CGPA</td>
-      						<td><?php echo $rdbdata['cgpa']; ?></td>
-      					</tr>
+              </table>
+              <div class="col-sm-12 text-center text-light" style="padding:10px;background: #3CA9E8;">
+                <h2>Marks</h2>
+              </div>
+              <table class="table table-bordered table-striped table-hover text-center">
+                <tr>
+                  <td>Course Name</td>
+                  <td>Marks</td>
+                  <td>Grade Point</td>
+                </tr>
+								<?php
+								$rolq=$dbdata['roll'];
+                $classq=$dbdata['class'];
+                $semq=$rdbdata['semester'];
+								$quer1=mysqli_query($link,"SELECT * FROM `reslt` WHERE `roll`='$rolq';");
+								$quer2=mysqli_query($link,"SELECT DISTINCT `course_name` FROM `courses` WHERE `class`='$classq' and `semester`='$semq';");
+                $numrows=mysqli_num_rows($quer2);
+                $rowq=mysqli_fetch_assoc($quer1);
+                while($rowqq=mysqli_fetch_assoc($quer2)){$coursename[]=$rowqq['course_name'];}
+                $marks[0]=$rowq['crs1'];$grd[0]=$rowq['g1'];
+                $marks[1]=$rowq['crs2'];$grd[1]=$rowq['g2'];
+                $marks[2]=$rowq['crs3'];$grd[2]=$rowq['g3'];
+                $marks[3]=$rowq['crs4'];$grd[3]=$rowq['g4'];
+                $marks[4]=$rowq['crs5'];$grd[4]=$rowq['g5'];
+                for ($i=0; $i < $numrows; $i++) {?>
+                  <tr>
+        						<td><?php echo $coursename[$i]; ?></td>
+        						<td><?php echo $marks[$i]; ?></td>
+                    <td><?php echo $grd[$i]; ?></td>
+        					</tr>
+                <?php }
+								 ?>
+               </table>
+                 <div class="col-sm-12 text-center text-light" style="padding:10px;background: #3CA9E8;">
+                   <h2>CGPA Information</h2>
+                 </div>
+                 <table class="table table-bordered table-striped table-hover text-center">
+                   <tr>
+                     <td colspan="2">CiGi</td>
+                     <td><?php echo $rowq['cigi']; ?></td>
+                   </tr>
+                   <tr>
+                     <td colspan="2">Earned Credit</td>
+                     <td><?php echo $rowq['tcr']; ?></td>
+                   </tr>
+                 <tr>
+                   <td colspan="2">CGPA</td>
+                   <td><?php echo $rowq['cgpa']; ?></td>
+                 </tr>
       				</table>
       			</div>
       		</div>

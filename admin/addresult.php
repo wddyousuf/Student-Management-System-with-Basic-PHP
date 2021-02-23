@@ -2,7 +2,7 @@
 	if (!isset($_SESSION['user_login'])) {
 		header('location: login.php');
 	}
-
+error_reporting(0);
  ?>
 <h1 class="text-primary"> <i class="fa fa-edit"></i> Add Result <small class="text-muted"> Add Result Info</small></h1>
 <nav aria-label="breadcrumb">
@@ -20,6 +20,7 @@ $rcrs3=0;$rcr3=0;$g3=0;
 $rcrs4=0;$rcr4=0;$g4=0;
 $rcrs5=0;$rcr5=0;$g5=0;
 if (isset($_POST['submitresult'])) {
+  $courseno=$_POST['crsnoo'];
   $rid=$_POST['id'];
   $rname=$_POST['name'];
   $rroll=$_POST['roll'];
@@ -31,21 +32,10 @@ if (isset($_POST['submitresult'])) {
 	$rcr2=$_POST['credit2'];
 	$rcrs3=$_POST['course3'];
 	$rcr3=$_POST['credit3'];
-	if (null !==$_POST['crsno']) {
-		if ($_POST['crsno']=5) {
-			$rcrs4=$_POST['course4'];
-			$rcr4=$_POST['credit4'];
-			$rcrs5=$_POST['course5'];
-			$rcr5=$_POST['credit5'];
-		}
-	}
-	if (null !==$_POST['crsno']) {
-		if ($_POST['crsno']=4) {
-			$rcrs4=$_POST['course4'];
-			$rcr4=$_POST['credit4'];
-		}
-	}
-	print_r($rcrs5);
+  $rcrs4=$_POST['course4'];
+  $rcr4=$_POST['credit4'];
+  $rcrs5=$_POST['course5'];
+  $rcr5=$_POST['credit5'];
 	if ($rcrs1<0 or $rcrs1>100) {
 		$crs1="Please Enter Valid Marks";
 	}elseif ($rcrs1<=100 and $rcrs1>=80) {
@@ -165,6 +155,13 @@ if (isset($_POST['submitresult'])) {
 	$tcr=$rcr1+$rcr2+$rcr3+$rcr4+$rcr5;
 	$cgpa=$cigi/$tcr;
   $rquery=mysqli_query($link,"INSERT INTO `reslt`(`id`, `name`, `roll`, `class`, `semester`, `crs1`, `g1`, `cr1`, `crs2`, `g2`, `cr2`, `crs3`, `g3`, `cr3`, `crs4`, `g4`, `cr4`, `crs5`, `g5`, `cr5`, `cigi`, `tcr`, `cgpa`) VALUES ('$rid','$rname','$rroll','$rclass','$rsem','$rcrs1','$g1','$rcr1','$rcrs2','$g2','$rcr2','$rcrs3','$g3','$rcr3','$rcrs4','$g4','$rcr4','$rcrs5','$g5','$rcr5','$cigi','$tcr','$cgpa');");
+  $j=1;
+  foreach ($courseno as $ckey => $cvalue) {
+    print_r($ckey);
+    print_r($cvalue);
+    $joint=mysqli_query($link,"INSERT INTO `jointtbl`(`class`, `semester`, `courseno`, `course_name`) VALUES ('$rclass','$rsem','crs$j','$cvalue');");
+    $j++;
+  }
   if ($rquery) {
     header("location: index.php?page=addresult");
   }
@@ -208,17 +205,6 @@ if (isset($_POST['submitresult'])) {
 						<tr>
 							<td><label for="roll">Roll No</label></td>
 							<td> <input class="form-control" type="text" id="roll" name="roll" pattern="[0-9]{6}" placeholder="160601"> </td>
-						</tr>
-						<tr>
-							<td><label for="crsno">Number of Course</label></td>
-							<td>
-								<select class="form-control" name="crsno" id="crsno" required="">
-									<option value="" disabled>Select</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-							</td>
 						</tr>
 						<tr>
 							<td colspan="2"><input class="btn btn-primary" type="submit" value="Proceed" name="submit"></td>
@@ -278,22 +264,35 @@ if (isset($_POST['submitresult'])) {
       								</select>
                     </td>
                   </tr>
-                  <?php if (isset($_POST['crsno']))
-									// print_r($_POST['crsno']);
-									$crsnumber=$_POST['crsno'];
-									for ($i=1; $i <= $crsnumber; $i++) {?>
-										<tr>
-	                    <td>Cousre No <?= $i ?></td>
-	                    <td><input class="form-control" type="number" name="course<?php echo $i; ?>" placeholder="75" required=""></td>
-	                  </tr>
-										<tr>
-	                    <td>Credit of Cousre No <?= $i ?> </td>
-	                    <td><input class="form-control" type="number" name="credit<?php echo $i; ?>" placeholder="75" required="" step="0.01"></td>
+                  <?php
+                  $classss=$dbdata['class'];
+                  $smstr=$dbdata['semester'];
+                  $query3=mysqli_query($link,"SELECT DISTINCT `course_name` FROM `courses` WHERE `class`='$classss' and `semester`='$smstr';");
+                  $numrow=mysqli_num_rows($query3);
+                  if($numrow>0){
+									 for ($i=1; $i <= $numrow; $i++) {
+                     $query4=mysqli_query($link,"SELECT DISTINCT `course_name` FROM `courses` WHERE `class`='$classss' and `semester`='$smstr';");
+                     ?>
+                    <tr>
+                        <td>Select Course</td>
+                        <td>
+                          <select class="form-control" name="crsnoo[<?php echo $i; ?>]">
+                            <?php while ($strarray=mysqli_fetch_assoc($query4)) {?>
+                            <option value="<?php echo $strarray['course_name']; ?>"><?php echo $strarray['course_name']; ?></option>
+                            <?php } ?>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+  	                    <td>Enter Marks</td>
+  	                    <td><input class="form-control" type="number" name="course<?php echo $i; ?>" placeholder="75" required=""></td>
+  	                  </tr>
+                    <tr>
+	                    <td>Enter Credit</td>
+	                    <td><input class="form-control" type="number" name="credit<?php echo $i; ?>" placeholder="3.00" required="" step="0.01"></td>
 	                  </tr>
 
-									<?php
-									}
-									 ?>
+									<?php } ?>
 
 
                   <tr>
@@ -304,14 +303,14 @@ if (isset($_POST['submitresult'])) {
       			</div>
       		</div>
       		<?php
-
-      	}else {
+        }
+      	else {
       		?>
       		<script type="text/javascript">
       			alert('data not found');
       		</script>
       		<?php
       	}
-      }
+      }}
       ?>
 	</div>

@@ -60,6 +60,7 @@ require_once'dbcon.php';
 						<a href="index.php?page=attendance" class="list-group-item list-group-item-action "><i class="fa fa-bar-chart"></i> Attendance</a>
 						<a href="index.php?page=attendancebydate" class="list-group-item list-group-item-action "><i class="fa fa-bar-chart"></i> View Attendance</a>
 						<a href="index.php?page=notice" class="list-group-item list-group-item-action "><i class="fa fa-bell"></i> Notice Desk</a>
+						<a href="index.php?page=courseregistration" class="list-group-item list-group-item-action "><i class="fa fa-book"></i> Course Registration</a>
 					</div>
 				</div>
 				<div class="col-sm-9">
