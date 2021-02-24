@@ -12,6 +12,36 @@
     <?php
     require_once 'admin/dbcon.php';
      ?>
+    <div class="container-fluid  bg-info">
+       <nav class="navbar navbar-expand-lg navbar-light">
+         <a class="navbar-brand" href="index.php">SMS</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNav">
+           <ul class="navbar-nav">
+             <li class="nav-item active">
+               <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="student.php">Student Info</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="result.php">Result</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="atndnc.php">Attendance</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="notice.php">Notice</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="teacher.php">Teacher</a>
+             </li>
+           </ul>
+         </div>
+       </nav>
+     </div>
      <div class="container" style="min-height:900px;">
     			<br><br>
     			<div class="row justify-content-center text-center">

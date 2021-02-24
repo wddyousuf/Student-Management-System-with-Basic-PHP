@@ -23,13 +23,13 @@
             <a href="student.php" class="btn btn-light" style="padding: 45px;">Student Info</a>
           </div>
           <div class="col-sm-3 justify-content-center text-center">
-            <a href="Notice.php" class="btn btn-light" style="padding: 45px;">Notice Corner</a>
-          </div>
-          <div class="col-sm-3 justify-content-center text-center">
             <a href="result.php" class="btn btn-light" style="padding: 45px;">Result Corner</a>
           </div>
           <div class="col-sm-3 justify-content-center text-center">
-            <a href="teacher.php" class="btn btn-light" style="padding: 45px;">Attendance Corner</a>
+            <a href="atndnc.php" class="btn btn-light" style="padding: 45px;">Attendance Corner</a>
+          </div>
+          <div class="col-sm-3 justify-content-center text-center">
+            <a href="Notice.php" class="btn btn-light" style="padding: 45px;">Notice Corner</a>
           </div>
           <div class="col-sm-12">
             <br><br><br>

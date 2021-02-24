@@ -102,6 +102,7 @@ $crsnmbr=mysqli_num_rows($countcrs);
 			<th>Name</th>
 			<th>Roll</th>
 			<th>Class</th>
+			<th>Semester</th>
 			<th>City</th>
 			<th>Contact</th>
 			<th>Photo</th>
@@ -121,6 +122,7 @@ $crsnmbr=mysqli_num_rows($countcrs);
 			<td><?php echo ucwords($row['name']); ?></td>
 			<td><?php echo $row['roll']; ?></td>
 			<td><?php echo $row['class']; ?></td>
+			<td><?php echo $row['semester']; ?></td>
 			<td><?php echo ucwords($row['city']); ?></td>
 			<td><?php echo $row['pcontact']; ?></td>
 			<td> <img style="height: 75px;" src="stimages/<?php echo $row['photo']; ?>" alt=""> </td>
