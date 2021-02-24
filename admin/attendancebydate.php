@@ -37,7 +37,6 @@ $curr_date= date('Y-m-d');
 				<br><br>
 					<input type="submit" name="showinfo" value="Show Students" class="btn btn-success">
 			</div>
-		</table>
   </div>
 	</form>
   <?php

@@ -52,15 +52,16 @@ require_once'dbcon.php';
 						     Dashboard
 					  </a>
 					  <a href="index.php?page=addstudent" class="list-group-item list-group-item-action"><i class="fa fa-user-plus"></i> Add Student</a>
-					  <a href="index.php?page=updatestudent" class="list-group-item list-group-item-action"><i class="fa fa-edit"></i> Update Student</a>
 					  <a href="index.php?page=allstudent" class="list-group-item list-group-item-action"><i class="fa fa-users"></i> All Students</a>
 					  <a href="index.php?page=alluser" class="list-group-item list-group-item-action "><i class="fa fa-users"></i> All users</a>
 						<a href="index.php?page=addresult" class="list-group-item list-group-item-action "><i class="fa fa-edit"></i> Add Result</a>
+						<a href="index.php?page=courseregistration" class="list-group-item list-group-item-action "><i class="fa fa-book"></i> Course Registration</a>
+						<a href="index.php?page=allcourse" class="list-group-item list-group-item-action "><i class="fa fa-book"></i> All Courses</a>
 						<a href="index.php?page=viewresult" class="list-group-item list-group-item-action "><i class="fa fa-area-chart"></i> View Result</a>
 						<a href="index.php?page=attendance" class="list-group-item list-group-item-action "><i class="fa fa-bar-chart"></i> Attendance</a>
 						<a href="index.php?page=attendancebydate" class="list-group-item list-group-item-action "><i class="fa fa-bar-chart"></i> View Attendance</a>
 						<a href="index.php?page=notice" class="list-group-item list-group-item-action "><i class="fa fa-bell"></i> Notice Desk</a>
-						<a href="index.php?page=courseregistration" class="list-group-item list-group-item-action "><i class="fa fa-book"></i> Course Registration</a>
+						<a href="index.php?page=viewnotice" class="list-group-item list-group-item-action "><i class="fa fa-bell"></i> All Notice</a>
 					</div>
 				</div>
 				<div class="col-sm-9">

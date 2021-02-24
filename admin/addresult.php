@@ -155,13 +155,13 @@ if (isset($_POST['submitresult'])) {
 	$tcr=$rcr1+$rcr2+$rcr3+$rcr4+$rcr5;
 	$cgpa=$cigi/$tcr;
   $rquery=mysqli_query($link,"INSERT INTO `reslt`(`id`, `name`, `roll`, `class`, `semester`, `crs1`, `g1`, `cr1`, `crs2`, `g2`, `cr2`, `crs3`, `g3`, `cr3`, `crs4`, `g4`, `cr4`, `crs5`, `g5`, `cr5`, `cigi`, `tcr`, `cgpa`) VALUES ('$rid','$rname','$rroll','$rclass','$rsem','$rcrs1','$g1','$rcr1','$rcrs2','$g2','$rcr2','$rcrs3','$g3','$rcr3','$rcrs4','$g4','$rcr4','$rcrs5','$g5','$rcr5','$cigi','$tcr','$cgpa');");
-  $j=1;
-  foreach ($courseno as $ckey => $cvalue) {
-    print_r($ckey);
-    print_r($cvalue);
-    $joint=mysqli_query($link,"INSERT INTO `jointtbl`(`class`, `semester`, `courseno`, `course_name`) VALUES ('$rclass','$rsem','crs$j','$cvalue');");
-    $j++;
-  }
+  // $j=1;
+  // foreach ($courseno as $ckey => $cvalue) {
+  //   print_r($ckey);
+  //   print_r($cvalue);
+  //   $joint=mysqli_query($link,"INSERT INTO `jointtbl`(`class`, `semester`, `courseno`, `course_name`) VALUES ('$rclass','$rsem','crs$j','$cvalue');");
+  //   $j++;
+  // }
   if ($rquery) {
     header("location: index.php?page=addresult");
   }

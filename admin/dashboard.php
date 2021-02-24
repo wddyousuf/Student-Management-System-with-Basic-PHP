@@ -17,6 +17,8 @@ $countst=mysqli_query($link,"SELECT * FROM `student_info`");
 $stnmbr=mysqli_num_rows($countst);
 $countuser=mysqli_query($link,"SELECT * FROM `user`");
 $usernmbr=mysqli_num_rows($countuser);
+$countcrs=mysqli_query($link,"SELECT * FROM `courses`");
+$crsnmbr=mysqli_num_rows($countcrs);
  ?>
 
 	<div class="row">
@@ -36,8 +38,8 @@ $usernmbr=mysqli_num_rows($countuser);
 				</div>
 				<a href="index.php?page=allstudent">
 					<div class="card-footer">
-					<span class="float-left"></span>
-					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i>All Students</span>
+					<span class="float-left">All Students</span>
+					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 				</a>
@@ -59,14 +61,36 @@ $usernmbr=mysqli_num_rows($countuser);
 				</div>
 				<a href="index.php?page=alluser">
 					<div class="card-footer">
-					<span class="float-left">All Users</span>
+					<span class="float-left">All Admins</span>
 					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i></span>
 					<div class="clearfix"></div>
 				</div>
 				</a>
 			</div>
 		</div>
-
+		<div class="col-sm-4">
+			<div class="card">
+				<div class="card-header  bg-primary">
+					<div class="row text-white">
+						<div class="col-xs-3">
+							<i class="fa fa-book fa-5x"></i>
+						</div>
+						<div class="col-xs-9 ml-auto mr-2">
+							<div class=" float-right carddddd"><?php echo $crsnmbr; ?></div>
+							<div class="clearfix"></div>
+							<div class="float-right">Number of Registered Courses</div>
+						</div>
+					</div>
+				</div>
+				<a href="index.php?page=allcourse">
+					<div class="card-footer">
+					<span class="float-left">All Courses</span>
+					<span class="float-right"><i class="fa fa-arrow-circle-o-right"></i></span>
+					<div class="clearfix"></div>
+				</div>
+				</a>
+			</div>
+		</div>
 	</div>
 <hr>
 <h3>All Students</h3>

@@ -51,6 +51,7 @@ require_once 'dbcon.php';
 									<option value="2nd">2nd Semester</option>
 								</select>
 							</td>
+						</tr>
 						<tr>
 							<td><label for="roll">Roll No</label></td>
 							<td> <input class="form-control" type="text" id="roll" name="roll" pattern="[0-9]{6}" placeholder="160601"> </td>
@@ -77,9 +78,18 @@ require_once 'dbcon.php';
       	$rdbdata=mysqli_fetch_assoc($rquery);
       	if (mysqli_num_rows($query)) {?>
       		<div class="row justify-content-center">
-      			<div class="col-sm-8 ">
+      			<div class="col-sm-12 " id="printrslt">
+							<img src="../images/pust.png" alt="Pabna University of Science & Technology" class="float-left img-thumbnail" style="max-width: 150px;margin-bottom: 10px;">
+							<h1 class="text-center text-danger">Pabna University of Science & Technology</h1>
+							<h2 class="text-center text-danger">Dept. Of Information and Communication Engineering</h2>
+							<h3 class="text-center text-danger"><?php echo "Result of ".$class." Year ".$semes." Semester ".date('Y'); ?></h3>
+							<br>
       				<table class="table table-bordered table-striped table-hover text-center">
-      					<tr>
+								<tr>
+      						<td>Name</td>
+      						<td><?php echo $dbdata['name']; ?></td>
+      					</tr>
+								<tr>
       						<td>Roll</td>
       						<td><?php echo $dbdata['roll']; ?></td>
       					</tr>
@@ -142,6 +152,7 @@ require_once 'dbcon.php';
                  </tr>
       				</table>
       			</div>
+						<button type="button" name="button" onclick="prf('printrslt')" class="btn btn-success">Print Result</button>
       		</div>
       		<?php
 
@@ -149,9 +160,22 @@ require_once 'dbcon.php';
       		?>
       		<script type="text/javascript">
       			alert('data not found');
+
       		</script>
       		<?php
       	}
       }
        ?>
 	</div>
+	<script>
+	function printpdf(){
+		window.print()=document.body.innerHTML;
+	}
+	function prf(paravalue){
+		var backup=document.body.innerHTML;
+		var divcntnt=document.getElementById(paravalue).innerHTML;
+		document.body.innerHTML= divcntnt;
+		window.print();
+		document.body.innerHTML= backup;
+	}
+	</script>
